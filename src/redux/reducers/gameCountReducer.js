@@ -1,15 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { emojiCodes } from "../../utils";
 // Reducer:
+
+export const initialState = {
+  smileys: 0,
+  lastEmoji: "",
+  booms: 0,
+  isTransition: false,
+  neighbours: {},
+  openedCards: [],
+  grid: [],
+};
 export const GameReducer = createSlice({
-  name: "gameCounter ",
-  initialState: {
-    smileys: 0,
-    lastEmoji: "",
-    booms: 0,
-    isTransition: false,
-    neighbours: {},
-  },
+  name: "gameCounter",
+  initialState,
 
   reducers: {
     INCREASE_SMILEY: (state) => {
@@ -38,6 +42,12 @@ export const GameReducer = createSlice({
     SET_NEIGHBOURS: (state, action) => {
       state.neighbours = action.payload;
     },
+    ADD_OPENED: (state, action) => {
+      state.openedCards.push(action.payload);
+    },
+    SET_GRID: (state, action) => {
+      state.grid = action.payload;
+    },
   },
 });
 // Actions:
@@ -49,6 +59,8 @@ export const {
   LAST_EMOJI,
   IS_TRANSITION,
   SET_NEIGHBOURS,
+  ADD_OPENED,
+  SET_GRID,
 } = GameReducer.actions;
 // Selectors:
 export const selectLastEmoji = (state) => state.gameCounter.lastEmoji;
@@ -56,5 +68,7 @@ export const selectSmileys = (state) => state.gameCounter.smileys;
 export const selectBooms = (state) => state.gameCounter.booms;
 export const selectTransition = (state) => state.gameCounter.isTransition;
 export const selectNeighbours = (state) => state.gameCounter.neighbours;
+export const selectOpened = (state) => state.gameCounter.openedCards;
+export const selectGrid = (state) => state.gameCounter.grid;
 
 export default GameReducer.reducer;

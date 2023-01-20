@@ -6,6 +6,7 @@ import {
   selectSmileys,
   selectTransition,
 } from "./redux/reducers/gameCountReducer";
+import { clearLocalStorage, initLocalStorage } from "./localStorage";
 import "./App.scss";
 
 function App() {
@@ -18,6 +19,8 @@ function App() {
   const smileysState = useSelector(selectSmileys);
   const boomsState = useSelector(selectBooms);
   const isTransition = useSelector(selectTransition);
+
+  useEffect(() => initLocalStorage(), []);
 
   useEffect(() => {
     if (!isTransition) {
@@ -35,7 +38,14 @@ function App() {
     <div className="container">
       <main>
         <div>
-          <button onClick={() => window.location.reload(true)}>New Game</button>
+          <button
+            onClick={() => {
+              clearLocalStorage();
+              window.location.reload(true);
+            }}
+          >
+            New Game
+          </button>
         </div>
         {win ? (
           <div>

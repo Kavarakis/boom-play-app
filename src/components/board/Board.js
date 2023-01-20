@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  selectGrid,
+  selectOpened,
   selectTransition,
+  SET_GRID,
   SET_NEIGHBOURS,
 } from "../../redux/reducers/gameCountReducer";
 import { CardComponent, EmojiComponent } from "../";
@@ -29,6 +32,8 @@ function Board(props) {
   // Redux Selectors and Dispatchers:
   const dispatch = useDispatch();
   const isTransition = useSelector(selectTransition);
+  const openedCards = useSelector(selectOpened);
+  const grid = useSelector(selectGrid);
   /**
    * Function for mapping Card component over array with appropiate props
    * @param {Array} temp
@@ -37,18 +42,28 @@ function Board(props) {
   function generateCards(temp) {
     return temp.map((key, i) => {
       return (
-        <CardComponent key={`${i}-${key}`} index={i}>
+        <CardComponent
+          key={`${i}-${key}`}
+          index={i}
+          isOpened={openedCards.includes(i)}
+        >
           <EmojiComponent src={key} />
         </CardComponent>
       );
     });
   }
-  useEffect(() => {
-    let res = generateEmojis(6 * 6);
-    let pos = getPositionForEmoji(res);
 
-    handleTable(generateCards(res));
+  useEffect(() => {
+    let res = [];
+    if (grid && grid.length) {
+      res = grid;
+    } else {
+      res = generateEmojis(6 * 6);
+    }
+    let pos = getPositionForEmoji(res);
     dispatch(SET_NEIGHBOURS(pos));
+    dispatch(SET_GRID(res));
+    handleTable(generateCards(res));
   }, []);
 
   return (

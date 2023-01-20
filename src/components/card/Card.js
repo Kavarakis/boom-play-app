@@ -1,7 +1,8 @@
-import { useState, React } from "react";
+import { useState, React, useEffect } from "react";
 import { emojiCodes, getIndicesOfNeighbours } from "../../utils";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  ADD_OPENED,
   INCREASE_BOOM,
   INCREASE_SMILEY,
   IS_TRANSITION,
@@ -15,7 +16,7 @@ import "./card.scss";
 
 function Card(props) {
   // Props:
-  const { index, children } = props;
+  const { index, children, isOpened } = props;
   // States:
   const [isClicked, handleisClicked] = useState(false);
   const [showBody, handleShowBody] = useState(false);
@@ -61,12 +62,18 @@ function Card(props) {
     handleNeighbours({ smiley: nSmileys, boom: nBooms });
   }
   /**
-   * Handle for Card Click
+   * Handle for card Click
    */
-  function CardClick() {
+  function cardClick() {
     handleisClicked(true);
-    dispatch(IS_TRANSITION(true));
-    checkEmoji(props.children.props);
+    if (!isOpened) {
+      dispatch(IS_TRANSITION(true));
+      dispatch(ADD_OPENED(index));
+      checkEmoji(props.children.props);
+    }
+  }
+  function addSmoothingTimeout(fn) {
+    setTimeout(() => fn(), 500);
   }
   /**
    * Handle for Card transition end upon clicking on it
@@ -74,17 +81,22 @@ function Card(props) {
   function onTransitionEnd() {
     handleShowBody(true);
     dispatch(IS_TRANSITION(false));
-    setTimeout(() => {
+    addSmoothingTimeout(() => {
       if (isClicked && props.children.props.src == emojiCodes.cyclone) {
         handleCyclone();
         handleShowBody(false);
       }
-    }, 500);
+    });
   }
+  useEffect(() => {
+    if (isOpened) {
+      addSmoothingTimeout(cardClick);
+    }
+  }, []);
   return (
     <div
       onTransitionEnd={() => onTransitionEnd()}
-      onClick={CardClick}
+      onClick={cardClick}
       className={`card ${isClicked ? "open" : ""}`}
     >
       {Object.values(neighbours).length ? (
