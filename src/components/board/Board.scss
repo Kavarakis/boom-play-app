@@ -1,0 +1,9 @@
+.board-6x6 {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto;
+  grid-gap: 5px;
+  margin: 1rem;
+}
+.board-6x6.block-clicking {
+  pointer-events: none;
+}
