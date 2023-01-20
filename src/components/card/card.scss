@@ -12,4 +12,9 @@
 .open {
   transform: rotateY(180deg);
   transition: all ease-in 0.5s;
+  pointer-events: none;
+}
+.cyclone {
+  transform: rotateY(180deg);
+  transition: all ease-in 1s;
 }

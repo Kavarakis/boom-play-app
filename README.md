@@ -1,109 +1,70 @@
-# boom-play-app
+# Getting Started with Create React App
 
-Boom game app challenge
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# :boom: Boom Challenge :boom:
+## Available Scripts
 
-## Assessment
+In the project directory, you can run:
 
-Dear Engineer,
+### `npm start`
 
-This assessment consists of developing a simple game somehow similar to minesweeper. The rules are defined below.
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-- The game starts on a 6 x 6 board with hidden tiles
-- The 36 tiles are randomly assigned a value
-  - 12 tiles are assigned smileys (:smiley:)
-  - 12 tiles are assigned bombs (:boom:)
-  - 12 tiles are assigned resets (:cyclone:)
-- The player can then flip one tile at a time, revealing its type
-- The player wins when flipping **3 consecutive smileys** :tada:
-- The player looses when flipping **2 consecutive bombs**
-- Flipping a reset will **reset** the number of consecutive **smileys and bombs to 0**
-  - additionally, a reset will also display the **number of bombs and smileys in its 8 surrounding tiles** _(optional)_
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-## Functional requirements
+### `npm test`
 
-- The game state should be persisted when reloading the page
-  - preferably use a state management library to handle the state of the game
-- There should be a button to restart the game
-- A score containing number of wins and losses should be kept in local storage _(optional)_
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-## Evaluation
+### `npm run build`
 
-The game should be implemented using `Angular` and you will be evaluated on the following aspects:
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-- Readability and maintainability of your code
-- Unit tests
-- End to End tests _(optional)_
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-Feel free to ask questions any time and use any libraries or tools that you might need.
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-**Good luck! :+1:**
+### `npm run eject`
 
-## Misc
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-Here are some `HTML` and `css/scss` snippets you might want to use to save time
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-`index.html`
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-```html
-<body>
-  <main>
-    <!-- 3 x 3 -->
-    <section class="board-3x3">
-      <div></div>
-      <div>💥</div>
-      <div>🌀</div>
-      <div>😃</div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </section>
-  </main>
-</body>
-```
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-`styles.scss`
+## Learn More
 
-```scss
-body {
-  padding: 1rem;
-  margin: 0;
-  background-color: #b762ff;
-  background-image: linear-gradient(160deg, #b762ff, #0079ff, #ff0, #ff576f);
-}
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #698ef9;
-  border: 1rem solid #000;
-  min-height: calc(100vh - 4rem);
-}
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-.board-3x3 {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  grid-gap: 5px;
-  margin: 1rem;
+### Code Splitting
 
-  & > * {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
-    width: 100px;
-    font-size: 2.5rem;
-    background-color: #fbeee0;
-    border-radius: 5%;
-  }
-}
-```
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-`board.png`
+### Analyzing the Bundle Size
 
-![Board](./board.png)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

@@ -1,42 +1,65 @@
-import { useEffect, useState, React } from "react";
-import { CardComponent, EmojiComponent, BoardComponent } from "./components";
-import { emojiCodes, shuffleCards } from "./utils";
+import { React, useEffect, useState } from "react";
+import { BoardComponent } from "./components";
+import { useSelector } from "react-redux";
+import {
+  selectBooms,
+  selectSmileys,
+  selectTransition,
+} from "./redux/reducers/gameCountReducer";
 import "./App.scss";
 
-function generateEmojis(size, key, emojis, clickedStateFn) {
-  const arr = [];
-  for (let i = 0; i < size; i++) {
-    arr.push(
-      <CardComponent key={`${i}-${key}`} clicked={clickedStateFn}>
-        <EmojiComponent src={emojis[key]} />
-      </CardComponent>
-    );
-  }
-  return arr;
-}
-
-function generateCards(size, clickedStateFn) {
-  return shuffleCards([
-    ...generateEmojis(size / 3, "boom", emojiCodes, clickedStateFn),
-    ...generateEmojis(size / 3, "cyclone", emojiCodes, clickedStateFn),
-    ...generateEmojis(size / 3, "smiley", emojiCodes, clickedStateFn),
-  ]);
-}
-
 function App() {
-  const [isOpening, handleIsOpening] = useState(false);
-  const [table, handleTable] = useState(null);
+  // States:
+  const [win, handleWin] = useState(false);
+  const [defeat, handleDefeat] = useState(false);
+  const [smileys, handleSmileys] = useState(0);
+  const [booms, handleBooms] = useState(0);
+  // Redux Selectors:
+  const smileysState = useSelector(selectSmileys);
+  const boomsState = useSelector(selectBooms);
+  const isTransition = useSelector(selectTransition);
 
-  const generateTable = () => {
-    handleTable(generateCards(6 * 6, handleIsOpening));
-  };
-
-  useEffect(() => generateTable(), []);
-
+  useEffect(() => {
+    if (!isTransition) {
+      handleSmileys(smileysState);
+      handleBooms(boomsState);
+      if (smileysState == 3) {
+        handleWin(true);
+      }
+      if (boomsState == 2) {
+        handleDefeat(true);
+      }
+    }
+  }, [isTransition]);
   return (
     <div className="container">
       <main>
-        <BoardComponent clicking={isOpening}>{table}</BoardComponent>
+        <div>
+          <button onClick={() => window.location.reload(true)}>New Game</button>
+        </div>
+        {win ? (
+          <div>
+            <h1>YOU WIN!</h1>
+          </div>
+        ) : (
+          ""
+        )}
+        {defeat ? (
+          <div>
+            <h1>YOU LOSE!</h1>
+          </div>
+        ) : (
+          ""
+        )}
+        {!win && !defeat ? (
+          <div>
+            <h3>Smileys: {smileys}</h3>
+            <h3>Booms: {booms}</h3>
+          </div>
+        ) : (
+          ""
+        )}
+        <BoardComponent end={win || defeat} />
       </main>
     </div>
   );
