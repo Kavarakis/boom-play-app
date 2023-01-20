@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 .card {
   display: flex;
   justify-content: center;
@@ -17,4 +19,12 @@
 .cyclone {
   transform: rotateY(180deg);
   transition: all ease-in 1s;
+}
+
+@media screen and (max-width: $large-phone) {
+  .card {
+    height: 60px;
+    width: 60px;
+    font-size: 1.5rem;
+  }
 }
