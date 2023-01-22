@@ -20,11 +20,11 @@
   transform: rotateY(180deg);
   transition: all ease-in 1s;
 }
-
-@media screen and (max-width: $large-phone) {
-  .card {
-    height: 60px;
-    width: 60px;
-    font-size: 1.5rem;
-  }
-}
+// TODO: Start of responsive mobile friendly design...
+// @media screen and (max-width: $large-phone) {
+//   .card {
+//     height: 60px;
+//     width: 60px;
+//     font-size: 1.5rem;
+//   }
+// }

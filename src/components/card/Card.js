@@ -10,6 +10,7 @@ import {
   RESET_BOOM,
   RESET_SMILEY,
   selectNeighbours,
+  selectOpened,
 } from "../../redux/reducers/gameCountReducer";
 import { EmojiComponent } from "..";
 import "./card.scss";
@@ -24,6 +25,7 @@ function Card(props) {
   // Redux Selectors and Dispatchers:
   const dispatch = useDispatch();
   const neighboursSelector = useSelector(selectNeighbours);
+  const openedSelector = useSelector(selectOpened);
   /**
    *  Function for executing Redux actions on configured store
    * @param {Object} props
@@ -62,7 +64,8 @@ function Card(props) {
     handleNeighbours({ smiley: nSmileys, boom: nBooms });
   }
   /**
-   * Handle for card Click
+   * Handle for Card click
+   * @returns {void}
    */
   function cardClick() {
     handleisClicked(true);
@@ -72,11 +75,22 @@ function Card(props) {
       checkEmoji(children.props);
     }
   }
+  /**
+   * Hook for changing open state on reset of the game (resets states)
+   */
+  useEffect(() => {
+    if (!openedSelector.includes(index)) {
+      handleShowBody(false);
+      handleNeighbours({});
+      handleisClicked(false);
+    }
+  }, [openedSelector]);
   function addSmoothingTimeout(fn) {
     setTimeout(() => fn(), 500);
   }
   /**
    * Handle for Card transition end upon clicking on it
+   * @returns {void}
    */
   function onTransitionEnd() {
     if (isClicked) {
@@ -90,11 +104,17 @@ function Card(props) {
       });
     }
   }
+  /**
+   *  Persisting stored cards on mount
+   */
   useEffect(() => {
     if (isOpened) {
       addSmoothingTimeout(cardClick);
     }
   }, []);
+  /**
+   * Render function
+   */
   return (
     <div
       onTransitionEnd={() => onTransitionEnd()}

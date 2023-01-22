@@ -177,15 +177,36 @@ describe("App Component tests", () => {
   });
 
   test("Check button - new game", async () => {
-    jest.spyOn(window.localStorage.__proto__, "clear");
-    Object.defineProperty(window, "location", {
-      configurable: true,
-      value: { reload: jest.fn() },
-    });
-    const container = await act(async () => renderWithProviders(<App />));
+    let initialState = {
+      smileys: 0,
+      lastEmoji: "",
+      booms: 0,
+      isTransition: false,
+      neighbours: { smiley: [], boom: [] },
+      openedCards: [],
+      grid: Array(6 * 6).fill(emojiCodes.smiley),
+    };
+    jest.useFakeTimers();
+    jest.spyOn(global, "setTimeout");
+    const container = await act(async () =>
+      renderWithProviders(<App />, {
+        preloadedState: { gameCounter: initialState },
+      })
+    );
+    const cards = container.baseElement.getElementsByClassName("card");
+    await act(async () => fireEvent.click(cards[1]));
+    await act(async () => fireEvent.transitionEnd(cards[1]));
+    await act(async () => jest.runAllTimers());
+
+    expect(container.baseElement.textContent).toContain(emojiCodes.smiley);
+
     const button = container.getByRole("button");
     await act(async () => fireEvent.click(button));
-    expect(window.localStorage.clear).toBeCalledTimes(1);
-    expect(location.reload).toBeCalledTimes(1);
+    let after = container.baseElement.textContent;
+    expect(container.store.getState().gameCounter.smileys).toBe(0);
+    expect(container.store.getState().gameCounter.lastEmoji).toBe("");
+    expect(container.store.getState().gameCounter.openedCards.length).toBe(0);
+    expect(container.store.getState().gameCounter.grid.length).toBe(36);
+    jest.useRealTimers();
   });
 });

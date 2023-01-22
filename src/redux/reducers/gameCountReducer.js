@@ -10,6 +10,8 @@ export const initialState = {
   neighbours: { smiley: [], boom: [] },
   openedCards: [],
   grid: [],
+  // wins: 0,
+  // loss: 0,
 };
 export const GameReducer = createSlice({
   name: "gameCounter",
@@ -26,7 +28,6 @@ export const GameReducer = createSlice({
         state.booms += 1;
       }
     },
-
     RESET_SMILEY: (state) => {
       state.smileys = 0;
     },
@@ -35,6 +36,9 @@ export const GameReducer = createSlice({
     },
     LAST_EMOJI: (state, action) => {
       state.lastEmoji = action.payload;
+    },
+    RESET_LAST_EMOJI: (state) => {
+      state.lastEmoji = "";
     },
     IS_TRANSITION: (state, action) => {
       state.isTransition = action.payload;
@@ -45,9 +49,18 @@ export const GameReducer = createSlice({
     ADD_OPENED: (state, action) => {
       state.openedCards.push(action.payload);
     },
+    RESET_OPENED: (state) => {
+      state.openedCards = [];
+    },
     SET_GRID: (state, action) => {
       state.grid = action.payload;
     },
+    // ADD_WIN: (state) => {
+    //   state.wins += 1;
+    // },
+    // ADD_LOSS: (state) => {
+    //   state.loss += 1;
+    // },
   },
 });
 // Actions:
@@ -60,7 +73,11 @@ export const {
   IS_TRANSITION,
   SET_NEIGHBOURS,
   ADD_OPENED,
+  RESET_OPENED,
   SET_GRID,
+  RESET_LAST_EMOJI,
+  // ADD_LOSS,
+  // ADD_WIN,
 } = GameReducer.actions;
 // Selectors:
 export const selectLastEmoji = (state) => state.gameCounter.lastEmoji;
@@ -70,5 +87,6 @@ export const selectTransition = (state) => state.gameCounter.isTransition;
 export const selectNeighbours = (state) => state.gameCounter.neighbours;
 export const selectOpened = (state) => state.gameCounter.openedCards;
 export const selectGrid = (state) => state.gameCounter.grid;
-
+// export const selectWins = (state) => state.gameCounter.wins;
+// export const selectLoss = (state) => state.gameCounter.loss;
 export default GameReducer.reducer;

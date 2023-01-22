@@ -1,4 +1,13 @@
-# Getting Started with Create React App
+## Task Details are in taskSetup.md
+
+- Estimated work time : 10-12 hrs
+- Added: deployment ready infrastructure (Dockerfile,nginx.conf)
+- Started work on responsive design
+- Added comments
+- Added tests
+- React-redux
+- .js template for React
+- local storage persistance of redux store for wins
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
