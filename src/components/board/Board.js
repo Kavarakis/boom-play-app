@@ -26,7 +26,7 @@ function generateEmojis(size) {
 
 function Board(props) {
   // Props:
-  const { end } = props;
+  const { end = false } = props;
   // States:
   const [table, handleTable] = useState([]);
   // Redux Selectors and Dispatchers:

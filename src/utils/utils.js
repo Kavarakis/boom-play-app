@@ -2,6 +2,7 @@ export const emojiCodes = {
   boom: String.fromCodePoint(0x1f4a5),
   cyclone: String.fromCodePoint(0x1f300),
   smiley: String.fromCodePoint(0x1f600),
+  default: String.fromCodePoint(0x2757),
 };
 
 /**

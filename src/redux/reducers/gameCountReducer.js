@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { emojiCodes } from "../../utils";
+import { emojiCodes } from "../../utils/utils";
 // Reducer:
 
 export const initialState = {
@@ -7,7 +7,7 @@ export const initialState = {
   lastEmoji: "",
   booms: 0,
   isTransition: false,
-  neighbours: {},
+  neighbours: { smiley: [], boom: [] },
   openedCards: [],
   grid: [],
 };

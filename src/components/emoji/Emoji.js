@@ -1,5 +1,8 @@
+import { emojiCodes } from "../../utils/utils";
+
 function Emoji(props) {
-  return <span>{props.src}</span>;
+  const { src = emojiCodes.default } = props;
+  return <span>{src}</span>;
 }
 
 export default Emoji;

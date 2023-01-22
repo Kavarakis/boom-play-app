@@ -16,7 +16,7 @@ import "./card.scss";
 
 function Card(props) {
   // Props:
-  const { index, children, isOpened } = props;
+  const { index = 0, children = <EmojiComponent />, isOpened = false } = props;
   // States:
   const [isClicked, handleisClicked] = useState(false);
   const [showBody, handleShowBody] = useState(false);
@@ -69,7 +69,7 @@ function Card(props) {
     if (!isOpened) {
       dispatch(IS_TRANSITION(true));
       dispatch(ADD_OPENED(index));
-      checkEmoji(props.children.props);
+      checkEmoji(children.props);
     }
   }
   function addSmoothingTimeout(fn) {
@@ -79,14 +79,16 @@ function Card(props) {
    * Handle for Card transition end upon clicking on it
    */
   function onTransitionEnd() {
-    handleShowBody(true);
-    dispatch(IS_TRANSITION(false));
-    addSmoothingTimeout(() => {
-      if (isClicked && props.children.props.src == emojiCodes.cyclone) {
-        handleCyclone();
-        handleShowBody(false);
-      }
-    });
+    if (isClicked) {
+      handleShowBody(true);
+      dispatch(IS_TRANSITION(false));
+      addSmoothingTimeout(() => {
+        if (children.props.src == emojiCodes.cyclone) {
+          handleCyclone();
+          handleShowBody(false);
+        }
+      });
+    }
   }
   useEffect(() => {
     if (isOpened) {
