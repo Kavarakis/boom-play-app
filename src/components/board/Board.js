@@ -10,6 +10,7 @@ import {
   RESET_BOOM,
   RESET_OPENED,
   RESET_LAST_EMOJI,
+  RESET_GRID,
 } from "../../redux/reducers/gameCountReducer";
 import { CardComponent, EmojiComponent } from "../";
 import { emojiCodes, getPositionForEmoji, shuffleArray } from "../../utils";
@@ -48,6 +49,7 @@ function Board(props) {
     dispatch(RESET_BOOM());
     dispatch(RESET_SMILEY());
     dispatch(RESET_LAST_EMOJI());
+    dispatch(RESET_GRID());
   }
   /**
    * Function for mapping Card component over array with appropiate props

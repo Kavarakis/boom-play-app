@@ -55,6 +55,9 @@ export const GameReducer = createSlice({
     SET_GRID: (state, action) => {
       state.grid = action.payload;
     },
+    RESET_GRID: (state) => {
+      state.grid = [];
+    },
     // ADD_WIN: (state) => {
     //   state.wins += 1;
     // },
@@ -76,6 +79,7 @@ export const {
   RESET_OPENED,
   SET_GRID,
   RESET_LAST_EMOJI,
+  RESET_GRID,
   // ADD_LOSS,
   // ADD_WIN,
 } = GameReducer.actions;
