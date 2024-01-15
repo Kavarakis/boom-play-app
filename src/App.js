@@ -72,6 +72,9 @@ function App() {
     <div className="container">
       <main>
         <div>
+          <h1>CEN 534 ElasticBeanstalk Showcase: BoomApp</h1>
+        </div>
+        <div>
           <button
             onClick={() => {
               clearLocalStorage();
