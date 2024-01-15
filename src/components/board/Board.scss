@@ -1,0 +1,24 @@
+@import "../../variables.scss";
+
+.board-6x6 {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto;
+  grid-gap: 5px;
+  margin: 1rem;
+}
+.board-6x6.block-clicking {
+  pointer-events: none;
+}
+// TODO: Start of responsive mobile friendly design...
+// @media screen and (max-width: $large-phone) {
+//   .board-6x6 {
+//     grid-template-columns: auto auto auto auto;
+//     grid-gap: 3px;
+//   }
+// }
+// @media screen and (max-width: $phone) {
+//   .board-6x6 {
+//     grid-template-columns: auto auto auto;
+//     grid-gap: 3px;
+//   }
+// }
